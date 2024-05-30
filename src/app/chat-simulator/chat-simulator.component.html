@@ -1,0 +1,33 @@
+<div class="chat-container">
+  <div class="header">
+    <div class="back-button">
+      <img src="assets/back-arrow.svg" alt="Voltar" />
+    </div>
+    <img src="assets/logo-soulplus.png" alt="Contato" />
+    <div class="contact-info">
+      <p class="title">{{ contactName }}</p>
+      <span>online</span>
+    </div>
+    <div class="header-icons float-right">
+      <img src="assets/camera-icon.png" alt="Video Call" />
+      <img src="assets/phone-icon.png" alt="Voice Call" />
+    </div>
+  </div>
+  <div class="messages" #scrollContainer>
+    <div *ngFor="let message of messages" [class]="message.type">
+      <img *ngIf="message.imageUrl" [src]="message.imageUrl" alt="Image" />
+      <video *ngIf="message.videoUrl" controls>
+        <source [src]="message.videoUrl" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <a *ngIf="message.fileUrl" [href]="message.fileUrl" download>{{
+        message.fileName
+      }}</a>
+      <p *ngIf="message.text" [innerHTML]="formatMessage(message.text)"></p>
+    </div>
+  </div>
+  <div class="input-container">
+    <input disabled="true" placeholder="Escreva uma mensagem" />
+    <button>Enviar</button>
+  </div>
+</div>
